@@ -17,6 +17,7 @@ void mostrarOpciones() {
     cout << "6 - Listar previas de una asignatura\n";
     cout << "7 - Determinar asignaturas habilitadas para un alumno\n";
     cout << "8 - Listar alumnos habilitados para una asignatura\n";
+    cout << "9 - Mostrar Datos de Alumno\n";
     cout << "0 - Salir\n";
     cout << "=========================================\n";
     cout << "Seleccione una opcion: ";
@@ -72,6 +73,40 @@ bool registrarCursoAlumno(Alumnos alumnos, Asignaturas asignaturas, Grafo &grafo
     return true;
 }
 
+static void mostrarResumenAlumno(Alumnos alumnos) {
+    String cedula;
+    strCrear(cedula);
+
+    cout << "Ingrese cedula: ";
+    strScan(cedula);
+
+    Alumno alumno = obtenerAlumno(alumnos, cedula);
+    if (alumno == 0) {
+        cout << "Error: el alumno no esta registrado." << endl;
+    } else {
+        imprimirResumenAlumno(alumno);
+    }
+
+    strDestruir(cedula);
+}
+
+static void mostrarEscolaridadAlumno(Alumnos alumnos) {
+    String cedula;
+    strCrear(cedula);
+
+    cout << "Ingrese cedula: ";
+    strScan(cedula);
+
+    Alumno alumno = obtenerAlumno(alumnos, cedula);
+    if (alumno == 0) {
+        cout << "Error: el alumno no esta registrado." << endl;
+    } else {
+        listarEscolaridad(escolaridadAlumno(alumno));
+    }
+
+    strDestruir(cedula);
+}
+
 void ejecutarMenu(Grafo &g) {
     int opcion;
 
@@ -111,6 +146,7 @@ void ejecutarMenu(Grafo &g) {
                 break;
             case 5:
                 cout << "=== Listar Escolaridad ===\n";
+                mostrarEscolaridadAlumno(alumnos);
                 break;
             case 6:
                 cout << "=== Listar Previas ===\n";
@@ -120,6 +156,10 @@ void ejecutarMenu(Grafo &g) {
                 break;
             case 8:
                 cout << "=== Alumnos Habilitados ===\n";
+                break;
+            case 9:
+                cout <<  "=== Mostrar Datos de Alumno ===\n";
+                mostrarResumenAlumno(alumnos);
                 break;
             case 0:
                 cout << "Saliendo del sistema. ¡Hasta luego!\n";
