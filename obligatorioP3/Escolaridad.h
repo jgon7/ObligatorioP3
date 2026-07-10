@@ -3,10 +3,20 @@
 
 #include "Curso.h"
 
-typedef struct rep_escolaridad *Escolaridad;
+typedef struct NodoL{
+                    Curso curso;
+                    NodoL * sig;
+} NodoCurso;
 
-Escolaridad crearEscolaridad();
-bool registrarCurso(Escolaridad escolaridad, Curso curso);
+typedef struct{
+                NodoCurso * prim;
+                NodoCurso * ult;
+} Escolaridad;
+
+//typedef struct rep_escolaridad *Escolaridad;
+
+void crearEscolaridad(Escolaridad &escolaridad);
+void registrarCurso(Escolaridad &escolaridad, Curso curso); //insertarAlFinal
 bool aproboAsignatura(Escolaridad escolaridad, int numeroAsignatura);
 bool fechaPosteriorOIgualAlUltimoCurso(Escolaridad escolaridad, Fecha fecha);
 int cantidadCursos(Escolaridad escolaridad);
