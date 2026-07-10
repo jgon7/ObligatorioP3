@@ -1,5 +1,7 @@
+#include "Alumnos.h"
+#include "Asignaturas.h"
+#include "GrafoPreviaturas.h"
 #include <iostream>
-#include "menu.h"
 
 using namespace std;
 
@@ -18,6 +20,56 @@ void mostrarOpciones() {
     cout << "0 - Salir\n";
     cout << "=========================================\n";
     cout << "Seleccione una opcion: ";
+}
+
+
+static bool tienePreviasInmediatasAprobadas(Alumno alumno, Grafo &grafo, int numeroAsignatura) {
+    for (int previa = 0; previa < cantAsignaturas; previa++) {
+        if (ExistePreviatura(grafo, previa, numeroAsignatura) &&
+            !aproboAsignatura(escolaridadAlumno(alumno), previa)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool registrarCursoAlumno(Alumnos alumnos, Asignaturas asignaturas, Grafo &grafo, String cedula, int numeroAsignatura, Fecha fecha, int calificacion) {
+    Alumno alumno = obtenerAlumno(alumnos, cedula);
+
+    if (alumno == 0) {
+        cout << "Error: el alumno no esta registrado." << endl;
+        return false;
+    }
+    if (!existeAsignatura(asignaturas, numeroAsignatura)) {
+        cout << "Error: la asignatura no esta registrada." << endl;
+        return false;
+    }
+    if (!esValidaFecha(fecha)) {
+        cout << "Error: la fecha no es valida." << endl;
+        return false;
+    }
+    if (calificacion < 0 || calificacion > 12) {
+        cout << "Error: la calificacion debe estar entre 0 y 12." << endl;
+        return false;
+    }
+    if (aproboAsignatura(escolaridadAlumno(alumno), numeroAsignatura)) {
+        cout << "Error: el alumno ya aprobo esa asignatura anteriormente." << endl;
+        return false;
+    }
+    if (!tienePreviasInmediatasAprobadas(alumno, grafo, numeroAsignatura)) {
+        cout << "Error: el alumno no tiene aprobadas todas las previas inmediatas." << endl;
+        return false;
+    }
+    if (!fechaPosteriorOIgualAlUltimoCurso(escolaridadAlumno(alumno), fecha)) {
+        cout << "Error: la fecha debe ser igual o posterior a la fecha del ultimo curso registrado." << endl;
+        return false;
+    }
+
+    Asignatura asignatura = obtenerAsignatura(asignaturas, numeroAsignatura);
+    Curso curso;
+    crearCurso(curso, numeroAsignatura, obtenerNombre(asignatura), fecha, calificacion);
+    registrarCurso(escolaridadAlumno(alumno), curso);
+    return true;
 }
 
 void ejecutarMenu(Grafo &g) {
@@ -70,7 +122,7 @@ void ejecutarMenu(Grafo &g) {
                 cout << "=== Alumnos Habilitados ===\n";
                 break;
             case 0:
-                cout << "Saliendo del sistema. ¡Hasta luego!\n";
+                cout << "Saliendo del sistema. Â¡Hasta luego!\n";
                 break;
             default:
                 cout << "Opcion invalida. Intente nuevamente.\n";
