@@ -141,7 +141,7 @@ void listarPreviaturas(Asignaturas &A, Grafo G, int numAsignatura) {
         if (visitado[i]) {
             cout << "Numero: " << i
                  << "Nombre: " << obtenerNombreAsignatura(A, i)
-                 << "--------------------------------" << endl; // [cite: 55]
+                 << "--------------------------------" << endl;
         }
     }
 }
@@ -185,18 +185,16 @@ void ejecutarMenu(Grafo &g) {
                 break;
             case 3:
                 cout << "=== Registrar Alumno ===\n";
-                String cedula;
+                int cedula;
                 String nombre;
                 String apellido;
-                String telefono;
+                int telefono;
 
-                strCrear(cedula);
                 strCrear(nombre);
                 strCrear(apellido);
-                strCrear(telefono);
 
                 cout << "Ingrese cedula: ";
-                strScan(cedula);
+                cin >> cedula;
 
                 cout << "Ingrese nombre: ";
                 strScan(nombre);
@@ -205,13 +203,11 @@ void ejecutarMenu(Grafo &g) {
                 strScan(apellido);
 
                 cout << "Ingrese telefono: ";
-                strScan(telefono);
+                cin >> telefono;
 
                 inscribirAlumno(alumnos, cedula, nombre, apellido, telefono);
-                strDestruir(cedula);
                 strDestruir(nombre);
                 strDestruir(apellido);
-                strDestruir(telefono);
                 break;
             case 4:
                 cout << "=== Registrar Curso Aprobado ===\n";
@@ -219,7 +215,7 @@ void ejecutarMenu(Grafo &g) {
                 break;
             case 5:
                 cout << "=== Listar Asignaturas ===\n";
-               listarAsignaturas(A);
+                listarAsignaturas(A);
                 break;
             case 6:
                 cout << "=== Listar Previas de una asignatura ===\n";
