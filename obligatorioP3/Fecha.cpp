@@ -3,11 +3,11 @@
 
 using namespace std;
 
-static bool esBisiesto(int anio) {
+bool esBisiesto(int anio) {
     return (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
 }
 
-static int diasDelMes(int mes, int anio) {
+int diasDelMes(int mes, int anio) {
     int dias[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     if (mes < 1 || mes > 12) {

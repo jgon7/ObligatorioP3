@@ -3,7 +3,7 @@
 
 using namespace std;
 
-static int largo(String s) {
+int largo(String s) {
     int i = 0;
 
     while (s != NULL && s[i] != '\0') {
@@ -12,7 +12,7 @@ static int largo(String s) {
     return i;
 }
 
-static void copiarCaracteres(String destino, String origen) {
+void copiarCaracteres(String destino, String origen) {
     int i = 0;
 
     while (origen != NULL && origen[i] != '\0') {
