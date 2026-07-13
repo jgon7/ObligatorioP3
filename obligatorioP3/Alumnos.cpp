@@ -9,7 +9,7 @@ void Crear (HashAlumnos &alumnos) {
     }
 }
 
-bool inscribirAlumno(HashAlumnos alumnos, int cedula, String nombre, String apellido, int telefono) {
+bool inscribirAlumno(HashAlumnos &alumnos, int cedula, String nombre, String apellido, int telefono) {
     if (hayAlumno(alumnos, cedula)) {
         cout << "Error: ya existe un alumno con esa cedula." << endl;
         return false;
@@ -32,7 +32,6 @@ Alumno obtenerAlumno(HashAlumnos alumnos, int cedula) {
 }
 
 int funcionHash(int cedula) {
-    if (cedula < 0) cedula = -cedula;
     return cedula % valorHash;
 }
 
@@ -52,4 +51,21 @@ void InsertarEnHash (HashAlumnos &alumnos, Alumno e) {
     nuevo->alumno = e;
     nuevo->sig = alumnos[cubeta];
     alumnos[cubeta] = nuevo;
+}
+
+bool hayAlumno(HashAlumnos alumnos, int cedula){
+    int posicion = funcionHash(cedula);
+
+    //lista que esta en esa posición
+    Lista actual = alumnos[posicion];
+
+    // Recorremos esa lista buscando la cedula
+    while (actual != NULL) {
+        if (cedulaAlumno(actual->alumno) == cedula) {
+            return true;
+        }
+        actual = actual->sig;
+    }
+
+    return false;
 }

@@ -5,7 +5,7 @@ using namespace std;
 
 void crearAsignaturas(Asignaturas &A, int numero, String nombre, int horas, bool optativa){
     if (A.tope < cantAsignaturas){
-        crearAsignatura(A[A.tope], numero, nombre, horas, optativa);
+        crearAsignatura(A.asignatura[A.tope], numero, nombre, horas, optativa);
         A.tope++;
     } else {
         cout << "No se pueden agregar mas asignaturas " << endl;
