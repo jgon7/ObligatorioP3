@@ -3,6 +3,7 @@
 
 #include "Constantes.h"
 #include "Asignatura.h"
+#include "String.h"
 
 typedef struct { Asignatura asignatura[cantAsignaturas];
                  int tope;
@@ -11,6 +12,8 @@ typedef struct { Asignatura asignatura[cantAsignaturas];
 void inicializarArregloAsignaturas(Asignaturas &A);
 void crearAsignaturas(Asignaturas &A);
 void listarAsignaturas(Asignaturas a);
-bool existeAsignatura(Asignaturas A, int numero); 
+bool existeAsignatura(Asignaturas A, int numero);
 Asignatura obtenerAsignatura(Asignaturas A, int numero);
+String obtenerNombreAsignatura(Asignaturas A, int numAsignatura);
+void ordenarAsignaturas(Asignaturas &A);
 #endif // COLECCION_ASIGNATURAS_H_INCLUDED

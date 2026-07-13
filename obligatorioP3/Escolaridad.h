@@ -1,17 +1,17 @@
-#ifndef ESCOLARIDAD_H__INCLUDED
+#ifndef ESCOLARIDAD_H_INCLUDED
 #define ESCOLARIDAD_H_INCLUDED
 
 #include "Curso.h"
 
-typedef struct NodoL{
+typedef struct NodoE{
                     Curso curso;
-                    NodoL * sig;
-} NodoCurso;
+                    NodoE * sig;
+                } NodoCurso;
 
 typedef struct{
                 NodoCurso * prim;
                 NodoCurso * ult;
-} Escolaridad;
+                } Escolaridad;
 
 //typedef struct rep_escolaridad *Escolaridad;
 
@@ -22,5 +22,8 @@ bool fechaPosteriorOIgualAlUltimoCurso(Escolaridad escolaridad, Fecha fecha);
 int cantidadCursos(Escolaridad escolaridad);
 int cantidadCursosAprobados(Escolaridad escolaridad);
 void listarEscolaridad(Escolaridad escolaridad);
+void copiarCurso(Curso &destino, Curso origen);
+int cantidadCursos(Escolaridad escolaridad);
+bool esVacia(Escolaridad escolaridad);
 
 #endif // ESCOLARIDAD_H_INCLUDED

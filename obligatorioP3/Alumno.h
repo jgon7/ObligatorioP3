@@ -4,10 +4,17 @@
 #include "Escolaridad.h"
 #include "String.h"
 
-typedef struct rep_alumno *Alumno;
 
-Alumno crearAlumno(String cedula, String nombre, String apellido, String telefono);
-String cedulaAlumno(Alumno alumno);
+typedef struct {
+    int cedula;
+    String nombre;
+    String apellido;
+    int telefono;
+    Escolaridad escolaridad;
+} Alumno;
+
+Alumno crearAlumno(int cedula, String nombre, String apellido, int telefono);
+int cedulaAlumno(Alumno alumno);
 Escolaridad escolaridadAlumno(Alumno alumno);
 void imprimirResumenAlumno(Alumno alumno);
 

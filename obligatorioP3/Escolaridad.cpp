@@ -1,4 +1,6 @@
-#include "Escolariad.h"
+#include "Escolaridad.h"
+#include <iostream>
+using namespace std;
 
 void crearEscolaridad(Escolaridad &escolaridad){
     escolaridad.prim = NULL;
@@ -92,4 +94,8 @@ void listarEscolaridad(Escolaridad escolaridad) {
              << " | " << (actual->curso.Calificacion >= 6 ? "Aprobada" : "No aprobada") << endl;
         actual = actual->sig;
     }
+}
+
+bool esVacia(Escolaridad e) {
+    return (e.prim == NULL);
 }

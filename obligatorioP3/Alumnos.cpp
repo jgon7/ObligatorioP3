@@ -3,73 +3,53 @@
 
 using namespace std;
 
-const int B = 100;
-
-typedef struct nodoL {
-    Alumno alumno;
-    nodoL * sig;
-} Nodo;
-
-typedef Nodo * Lista;
-typedef Lista Hash[B];
-
-static int hashCedula(String cedula);
-static Alumno buscarEnLista(Lista lista, String cedula);
-
-
-struct rep_alumnos {
-    Hash tabla;
-};
-
-Alumnos crearAlumnos() {
-    Alumnos alumnos = new rep_alumnos;
-
-    for (int i = 0; i < B; i++) {
-        alumnos->tabla[i] = 0;
+void Crear (HashAlumnos &alumnos) {
+    for (int i = 0; i < valorHash; i++) {
+        alumnos[i] = NULL;
     }
-    return alumnos;
 }
 
-
-bool inscribirAlumno(Alumnos alumnos, String cedula, String nombre, String apellido, String telefono) {
-    if (obtenerAlumno(alumnos, cedula) != 0) {
+bool inscribirAlumno(HashAlumnos alumnos, int cedula, String nombre, String apellido, int telefono) {
+    if (hayAlumno(alumnos, cedula)) {
         cout << "Error: ya existe un alumno con esa cedula." << endl;
         return false;
     }
-
     Alumno alumno = crearAlumno(cedula, nombre, apellido, telefono);
-    int cubeta = hashCedula(cedula);
+    InsertarEnHash(alumnos, alumno);
+    return true;
+    /*
     Lista nuevo = new Nodo;
     nuevo->alumno = alumno;
     nuevo->sig = alumnos->tabla[cubeta];
     alumnos->tabla[cubeta] = nuevo;
     return true;
+    */
 }
 
-Alumno obtenerAlumno(Alumnos alumnos, String cedula) {
-    int cubeta = hashCedula(cedula);
-    return buscarEnLista(alumnos->tabla[cubeta], cedula);
+Alumno obtenerAlumno(HashAlumnos alumnos, int cedula) {
+    int cubeta = funcionHash(cedula);
+    return buscarEnLista(alumnos[cubeta], cedula);
 }
 
-static int hashCedula(String cedula) {
-    int numero = 0;
-    int i = 0;
-
-    while (cedula != 0 && cedula[i] != '\0') {
-        if (cedula[i] >= '0' && cedula[i] <= '9') {
-            numero = numero * 10 + (cedula[i] - '0');
-        }
-        i++;
-    }
-    return numero % B;
+int funcionHash(int cedula) {
+    if (cedula < 0) cedula = -cedula;
+    return cedula % valorHash;
 }
 
-static Alumno buscarEnLista(Lista lista, String cedula) {
-    while (lista != 0) {
-        if (strEq(cedulaAlumno(lista->alumno), cedula)) {
+Alumno buscarEnLista(Lista lista, int cedula) {
+    while (lista != NULL) {
+        if (cedulaAlumno(lista->alumno) == cedula) {
             return lista->alumno;
         }
         lista = lista->sig;
     }
-    return 0;
+}
+
+void InsertarEnHash (HashAlumnos &alumnos, Alumno e) {
+    int cubeta = funcionHash(cedulaAlumno(e));
+
+    Nodo * nuevo = new Nodo;
+    nuevo->alumno = e;
+    nuevo->sig = alumnos[cubeta];
+    alumnos[cubeta] = nuevo;
 }

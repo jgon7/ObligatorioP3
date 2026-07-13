@@ -32,7 +32,29 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Alumno.cpp" />
+		<Unit filename="Alumno.h" />
+		<Unit filename="Alumnos.cpp" />
+		<Unit filename="Alumnos.h" />
+		<Unit filename="Asignatura.cpp" />
+		<Unit filename="Asignatura.h" />
+		<Unit filename="Asignaturas.cpp" />
+		<Unit filename="Asignaturas.h" />
+		<Unit filename="Constantes.h" />
+		<Unit filename="Curso.cpp" />
+		<Unit filename="Curso.h" />
+		<Unit filename="Escolaridad.cpp" />
+		<Unit filename="Escolaridad.h" />
+		<Unit filename="Fecha.cpp" />
+		<Unit filename="Fecha.h" />
+		<Unit filename="GrafoPreviaturas.cpp" />
+		<Unit filename="GrafoPreviaturas.h" />
+		<Unit filename="Menu.cpp" />
+		<Unit filename="String.cpp" />
+		<Unit filename="String.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="obligatorioP3.cbp" />
+		<Unit filename="obligatorioP3.layout" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
