@@ -1,6 +1,5 @@
 #include "Escolaridad.h"
-#include <iostream>
-using namespace std;
+#include <stdio.h>
 
 void crearEscolaridad(Escolaridad &escolaridad){
     escolaridad.prim = NULL;
@@ -82,16 +81,16 @@ void listarEscolaridad(Escolaridad escolaridad) {
     NodoCurso * actual = escolaridad.prim;
 
     if (esVacia(escolaridad)) {
-        cout << "No hay cursos registrados en la escolaridad." << endl;
+        printf("No hay cursos registrados en la escolaridad.\n");
     }
 
     while (actual != NULL) {
-        cout << "Asignatura " << actual->curso.numeroAsignatura << " - ";
+        printf("Asignatura %d - ", actual->curso.numeroAsignatura);
         strPrint(actual->curso.nombreAsignatura);
-        cout << " | Fecha: ";
+        printf(" | Fecha: ");
         mostrarFecha(actual->curso.fecha);
-        cout << " | Calificacion: " << actual->curso.Calificacion
-             << " | " << (actual->curso.Calificacion >= 6 ? "Aprobada" : "No aprobada") << endl;
+        printf(" | Calificacion: %d | %s\n", actual->curso.Calificacion,
+               actual->curso.Calificacion >= 6 ? "Aprobada" : "No aprobada");
         actual = actual->sig;
     }
 }

@@ -17,11 +17,11 @@ typedef Lista HashAlumnos[valorHash];
 
 
 void crear(HashAlumnos &alumnos);
-bool inscribirAlumno(HashAlumnos alumnos, int cedula, String nombre, String apellido, int telefono);
+bool inscribirAlumno(HashAlumnos &alumnos, int cedula, String nombre, String apellido, int telefono);
 bool hayAlumno(HashAlumnos alumnos, int cedula);
-Alumno obtenerAlumno(HashAlumnos alumnos, int cedula);
+Alumno &obtenerAlumno(HashAlumnos alumnos, int cedula);
 int funcionHash(int cedula);
-Alumno buscarEnLista(Lista lista, int cedula);
+Alumno &buscarEnLista(Lista lista, int cedula);
 void InsertarEnHash (HashAlumnos &alumnos, Alumno e);
 
 #endif // ALUMNOS_H_INCLUDED

@@ -1,14 +1,12 @@
 #include "Asignaturas.h"
-#include <iostream>
-
-using namespace std;
+#include <stdio.h>
 
 void crearAsignaturas(Asignaturas &A, int numero, String nombre, int horas, bool optativa){
     if (A.tope < cantAsignaturas){
         crearAsignatura(A.asignatura[A.tope], numero, nombre, horas, optativa);
         A.tope++;
     } else {
-        cout << "No se pueden agregar mas asignaturas " << endl;
+        printf("No se pueden agregar mas asignaturas\n");
     }
 
 }
@@ -36,14 +34,14 @@ Asignatura obtenerAsignatura(Asignaturas A, int numero) {
 
 void listarAsignaturas(Asignaturas a) {
     if (a.tope == 0) {
-        cout << "No hay asignaturas registradas en el sistema" << endl;
+        printf("No hay asignaturas registradas en el sistema\n");
         return;
     }
 
     ordenarAsignaturas(a);
 
-    cout << "LISTADO DE ASIGNATURAS" << endl;
-    cout << "-----------------------" << endl;
+    printf("LISTADO DE ASIGNATURAS\n");
+    printf("-----------------------\n");
 
     for (int i = 0; i < a.tope; i++) {
         mostrarAsignatura(a.asignatura[i]);

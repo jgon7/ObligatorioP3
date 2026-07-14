@@ -1,13 +1,11 @@
 #include "Fecha.h"
-#include <iostream>
+#include <stdio.h>
 
-using namespace std;
-
-bool esBisiesto(int anio) {
+static bool esBisiesto(int anio) {
     return (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
 }
 
-int diasDelMes(int mes, int anio) {
+static int diasDelMes(int mes, int anio) {
     int dias[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     if (mes < 1 || mes > 12) {
@@ -20,13 +18,13 @@ int diasDelMes(int mes, int anio) {
 }
 
 void cargarFecha(Fecha &fecha) {
-    cin >> fecha.dia;
-    cin >> fecha.mes;
-    cin >> fecha.anio;
+    scanf("%d", &fecha.dia);
+    scanf("%d", &fecha.mes);
+    scanf("%d", &fecha.anio);
 }
 
 void mostrarFecha(Fecha fecha) {
-    cout << fecha.dia << "/" << fecha.mes << "/" << fecha.anio;
+    printf("%d/%d/%d", fecha.dia, fecha.mes, fecha.anio);
 }
 
 int darDia(Fecha fecha) {

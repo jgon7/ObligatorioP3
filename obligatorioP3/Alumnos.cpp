@@ -1,9 +1,7 @@
 #include "Alumnos.h"
-#include <iostream>
+#include <stdio.h>
 
-using namespace std;
-
-void Crear (HashAlumnos &alumnos) {
+void crear (HashAlumnos &alumnos) {
     for (int i = 0; i < valorHash; i++) {
         alumnos[i] = NULL;
     }
@@ -11,7 +9,7 @@ void Crear (HashAlumnos &alumnos) {
 
 bool inscribirAlumno(HashAlumnos &alumnos, int cedula, String nombre, String apellido, int telefono) {
     if (hayAlumno(alumnos, cedula)) {
-        cout << "Error: ya existe un alumno con esa cedula." << endl;
+        printf("Error: ya existe un alumno con esa cedula.\n");
         return false;
     }
     Alumno alumno = crearAlumno(cedula, nombre, apellido, telefono);
@@ -26,7 +24,7 @@ bool inscribirAlumno(HashAlumnos &alumnos, int cedula, String nombre, String ape
     */
 }
 
-Alumno obtenerAlumno(HashAlumnos alumnos, int cedula) {
+Alumno &obtenerAlumno(HashAlumnos alumnos, int cedula) {
     int cubeta = funcionHash(cedula);
     return buscarEnLista(alumnos[cubeta], cedula);
 }
@@ -35,7 +33,7 @@ int funcionHash(int cedula) {
     return cedula % valorHash;
 }
 
-Alumno buscarEnLista(Lista lista, int cedula) {
+Alumno &buscarEnLista(Lista lista, int cedula) {
     while (lista != NULL) {
         if (cedulaAlumno(lista->alumno) == cedula) {
             return lista->alumno;
@@ -56,7 +54,7 @@ void InsertarEnHash (HashAlumnos &alumnos, Alumno e) {
 bool hayAlumno(HashAlumnos alumnos, int cedula){
     int posicion = funcionHash(cedula);
 
-    //lista que esta en esa posición
+    //lista que esta en esa posiciÃ³n
     Lista actual = alumnos[posicion];
 
     // Recorremos esa lista buscando la cedula

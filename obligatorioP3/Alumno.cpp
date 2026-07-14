@@ -1,6 +1,5 @@
 #include "Alumno.h"
-#include <iostream>
-using namespace std;
+#include <stdio.h>
 
 
 Alumno crearAlumno(int cedula, String nombre, String apellido, int telefono) {
@@ -23,16 +22,17 @@ int cedulaAlumno(Alumno alumno) {
     return alumno.cedula;
 }
 
-Escolaridad escolaridadAlumno(Alumno alumno) {
+Escolaridad &escolaridadAlumno(Alumno &alumno) {
     return alumno.escolaridad;
 }
 
 void imprimirResumenAlumno(Alumno alumno) {
-    cout << "Nombre: ";
+    printf("Nombre: ");
     strPrint(alumno.nombre);
-    cout << " | Apellido: ";
+    printf(" | Apellido: ");
     strPrint(alumno.apellido);
-    cout << " | Telefono: " <<  alumno.telefono;
-    cout << " | Cursos registrados: " << cantidadCursos(alumno.escolaridad)
-         << " | Cursos aprobados: " << cantidadCursosAprobados(alumno.escolaridad) << endl;
+    printf(" | Telefono: %d", alumno.telefono);
+    printf(" | Cursos registrados: %d | Cursos aprobados: %d\n",
+           cantidadCursos(alumno.escolaridad),
+           cantidadCursosAprobados(alumno.escolaridad));
 }

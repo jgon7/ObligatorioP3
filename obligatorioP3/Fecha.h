@@ -26,8 +26,4 @@ bool esMayorFechas(Fecha a, Fecha b);
 
 bool sonIgualesFechas(Fecha a, Fecha b);
 
-bool esBisiesto(int anio);
-
-int diasDelMes(int mes, int anio);
-
 #endif // FECHA_H_INCLUDED
