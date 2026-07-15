@@ -116,10 +116,12 @@ void registrarPreviatura(Grafo &g, Asignaturas &A, int numAsignatura, int numPre
 
     if (!existeAsignatura(A, numAsignatura) || !existeAsignatura(A,numPrevia)) {
         printf("\n Al menos una de las asignaturas ingresadas no existe en el sistema.");
+         return;
     }
 
     if (ExistePreviatura(g, numPrevia, numAsignatura, A.tope)) {
         printf("\n No se puede registrar la asignatura por generar un ciclo");
+         return;
     }
 
     AgregarPreviatura(g, numAsignatura, numPrevia);
