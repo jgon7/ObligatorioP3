@@ -45,7 +45,7 @@ void registrarCursoAlumno(HashAlumnos &alumnos, Asignaturas asignaturas, Grafo &
 
     if (ok) {
 
-        Alumno alumno = obtenerAlumno(alumnos, cedula);
+        Alumno &alumno = obtenerAlumno(alumnos, cedula);
 
         if (aproboAsignatura(escolaridadAlumno(alumno), numeroAsignatura)) {
             printf("Error: el alumno ya aprobo esa asignatura anteriormente.");
