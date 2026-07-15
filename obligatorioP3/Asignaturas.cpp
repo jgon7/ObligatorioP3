@@ -1,10 +1,11 @@
 #include "Asignaturas.h"
 #include <stdio.h>
 
-void crearAsignaturas(Asignaturas &A, int numero, String nombre, int horas, bool optativa){
+void crearAsignaturas(Asignaturas &A, String nombre, int horas, bool optativa){
     if (A.tope < cantAsignaturas){
-        crearAsignatura(A.asignatura[A.tope], numero, nombre, horas, optativa);
+        crearAsignatura(A.asignatura[A.tope], A.tope, nombre, horas, optativa);
         A.tope++;
+        printf("Asignatura registrada correctamente.\n");
     } else {
         printf("No se pueden agregar mas asignaturas\n");
     }
@@ -40,9 +41,6 @@ void listarAsignaturas(Asignaturas a) {
 
     ordenarAsignaturas(a);
 
-    printf("LISTADO DE ASIGNATURAS\n");
-    printf("-----------------------\n");
-
     for (int i = 0; i < a.tope; i++) {
         mostrarAsignatura(a.asignatura[i]);
     }
@@ -59,4 +57,8 @@ void ordenarAsignaturas(Asignaturas &a) {
             }
         }
     }
+}
+
+int obtenerNumeroAsignatura(Asignaturas A, int posicionArreglo) {
+    return obtenerNumero(A.asignatura[posicionArreglo]);
 }

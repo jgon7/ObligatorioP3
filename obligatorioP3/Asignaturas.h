@@ -10,11 +10,12 @@ typedef struct { Asignatura asignatura[cantAsignaturas];
                } Asignaturas;
 
 void inicializarArregloAsignaturas(Asignaturas &A);
-void crearAsignaturas(Asignaturas &A, int numero, String nombre, int horas, bool optativa);
+void crearAsignaturas(Asignaturas &A, String nombre, int horas, bool optativa);
 int cantAsignaturasRegistradas(Asignaturas &A);
 void listarAsignaturas(Asignaturas a);
 bool existeAsignatura(Asignaturas A, int numero);
 Asignatura obtenerAsignatura(Asignaturas A, int numero);
 String obtenerNombreAsignatura(Asignaturas A, int numAsignatura);
+int obtenerNumeroAsignatura(Asignaturas A, int posicionArreglo);
 void ordenarAsignaturas(Asignaturas &A);
 #endif // COLECCION_ASIGNATURAS_H_INCLUDED

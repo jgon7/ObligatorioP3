@@ -17,7 +17,7 @@ typedef Lista HashAlumnos[valorHash];
 
 
 void crear(HashAlumnos &alumnos);
-bool inscribirAlumno(HashAlumnos &alumnos, int cedula, String nombre, String apellido, int telefono);
+void inscribirAlumno(HashAlumnos &alumnos, int cedula, String nombre, String apellido, int telefono);
 bool hayAlumno(HashAlumnos alumnos, int cedula);
 Alumno &obtenerAlumno(HashAlumnos alumnos, int cedula);
 int funcionHash(int cedula);

@@ -20,13 +20,8 @@ bool EsPreviaDirecta (Grafo &G, int asig1, int asig2){
     return hay;
 }
 
-bool ExistePreviatura(GrafoPreviaturas g, int origen, int destino, int tope) {
-    bool visitado[cantAsignaturas] = { false };
-    return ExisteCaminoAux(g, origen, destino, tope, visitado);
-}
-
 // Hay que recorrer el grafo de forma recursiva (DFS) para ver si hay un camino
-bool ExisteCaminoAux(GrafoPreviaturas g, int actual, int destino, int tope, bool visitado[]) {
+bool ExisteCaminoAux(Grafo g, int actual, int destino, int tope, bool visitado[]) {
     if (actual == destino)
         return true;
 
@@ -44,13 +39,19 @@ bool ExisteCaminoAux(GrafoPreviaturas g, int actual, int destino, int tope, bool
 }
 
 
+bool ExistePreviatura(Grafo g, int origen, int destino, int tope) {
+    bool visitado[cantAsignaturas] = { false };
+    return ExisteCaminoAux(g, origen, destino, tope, visitado);
+}
+
+
 //igual que ExisteCaminoAux, pero acá en este DFS recorremos hacia atras en las previas para ir mostrando
 void buscarPreviaturas(Grafo G, int actual, int tope, bool visitado[]) {
     for (int i = 0; i < tope; i++) {
         //cambiamos el orden en la matriz para buscar hacia atras
         if (G[i][actual] == 1 && !visitado[i]) {
             visitado[i] = true; // La marcamos como una previa encontrada
-            buscarPreviasAux(G, i, tope, visitado);
+            buscarPreviaturas(G, i, tope, visitado);
         }
     }
 }

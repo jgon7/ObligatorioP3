@@ -1,9 +1,22 @@
 #include <iostream>
+#include "Alumnos.h"
+#include "Asignaturas.h"
+#include "GrafoPreviaturas.h"
+#include "Menu.h"
 
 using namespace std;
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    Grafo G;
+    Asignaturas A;
+    HashAlumnos alumnos;
+
+    CrearGrafo(G);
+    inicializarArregloAsignaturas(A);
+    crear(alumnos);
+
+    ejecutarMenu(G, A, alumnos);
+
     return 0;
 }

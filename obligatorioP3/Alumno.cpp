@@ -4,13 +4,9 @@
 
 Alumno crearAlumno(int cedula, String nombre, String apellido, int telefono) {
     Alumno a;
-    /*
-    a->cedula = NULL; //para no borrar dirreciones invalidas
-    a->nombre = NULL;
-    a->apellido = NULL;
-    a->telefono = NULL;
-    */
     a.cedula = cedula;
+    strCrear(a.nombre);
+    strCrear(a.apellido);
     strCop(a.nombre, nombre);
     strCop(a.apellido, apellido);
     a.telefono = telefono;
@@ -35,4 +31,5 @@ void imprimirResumenAlumno(Alumno alumno) {
     printf(" | Cursos registrados: %d | Cursos aprobados: %d\n",
            cantidadCursos(alumno.escolaridad),
            cantidadCursosAprobados(alumno.escolaridad));
+    printf("----------------------------------------------\n");
 }

@@ -7,6 +7,7 @@ typedef int Grafo[cantAsignaturas][cantAsignaturas];
 void CrearGrafo (Grafo &G);
 void AgregarPreviatura(Grafo &G, int asig1, int asig2);
 bool EsPreviaDirecta(Grafo &G, int asig1, int asig2);
-void buscarPreviaturas(Grafo G, int actual, int tope, bool visitado[])
+void buscarPreviaturas(Grafo G, int actual, int tope, bool visitado[]);
+bool ExistePreviatura(Grafo g, int origen, int destino, int tope);
 
 #endif // GRAFOPREVIATURAS_H_INCLUDED

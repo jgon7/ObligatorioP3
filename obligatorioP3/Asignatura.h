@@ -12,6 +12,7 @@ typedef struct {
 
 void crearAsignatura(Asignatura &A, int numero, String nombre, int horas, bool optativa);
 String obtenerNombre(Asignatura A);
+int obtenerNumero(Asignatura A);
 void mostrarAsignatura(Asignatura A);
 
 #endif // ASIGNATURA_H_INCLUDED

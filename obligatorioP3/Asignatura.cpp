@@ -14,18 +14,20 @@ String obtenerNombre(Asignatura A){
 }
 
 void mostrarAsignatura(Asignatura A){
-    printf("-----------------------\n");
-    printf("NUMERO: \n\n");
-    printf("%d\n", A.numeroAsignatura);
-    printf("\n NOMBRE: \n\n");
+    printf("Numero: %d", A.numeroAsignatura);
+    printf(" | Nombre: ");
     strPrint(A.nombreAsignatura);
-    printf("\n HORAS: \n\n");
-    printf("%d\n", A.cantidadHoras);
-    printf("\n TIPO ASIGNATURA: \n\n");
+    printf(" | Horas: %d", A.cantidadHoras);
+    printf(" | Tipo Asignatura: ");
     if (A.optativa) {
-        printf("Optativa\n");
+        printf("Optativa");
     } else {
-        printf("Obligatoria\n");
+        printf("Obligatoria");
     }
-    printf("-----------------------\n");
+    printf("----------------------------------------------\n");
 }
+
+int obtenerNumero(Asignatura A){
+    return A.numeroAsignatura;
+}
+

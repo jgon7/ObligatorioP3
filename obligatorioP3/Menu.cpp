@@ -1,25 +1,27 @@
 #include "Alumnos.h"
 #include "Asignaturas.h"
 #include "GrafoPreviaturas.h"
+#include "Fecha.h"
 #include <iostream>
 
 using namespace std;
 
 void mostrarOpciones() {
-    cout << "=========================================\n";
-    cout << "             MENU PRINCIPAL              \n";
-    cout << "=========================================\n";
-    cout << "1 - Registrar asignatura\n";
-    cout << "2 - Agregar previatura\n";
-    cout << "3 - Registrar alumno\n";
-    cout << "4 - Registrar curso aprobado\n";
-    cout << "5 - Listar Asignaturas\n";
-    cout << "6 - Listar previas de una asignatura\n";
-    cout << "7 - Listar datos de un alumno\n";
-    cout << "8 - Listar escolaridad de un alumno";
-    cout << "0 - Salir\n";
-    cout << "=========================================\n";
-    cout << "Seleccione una opcion: ";
+
+     printf("=========================================\n");
+     printf("             MENU PRINCIPAL              \n");
+     printf("=========================================\n");
+     printf("1 - Registrar asignatura\n");
+     printf("2 - Agregar previatura\n");
+     printf("3 - Registrar alumno\n");
+     printf("4 - Registrar curso aprobado\n");
+     printf("5 - Listar Asignaturas\n");
+     printf("6 - Listar previas de una asignatura\n");
+     printf( "7 - Listar datos de un alumno\n");
+     printf( "8 - Listar escolaridad de un alumno\n");
+     printf( "0 - Salir\n");
+     printf( "=========================================\n");
+     printf( "Seleccione una opcion: ");
 }
 
 
@@ -33,209 +35,215 @@ bool tienePreviasInmediatasAprobadas(Alumno alumno, Grafo &grafo, int numeroAsig
     return true;
 }
 
-bool registrarCursoAlumno(Alumnos alumnos, Asignaturas asignaturas, Grafo &grafo, int cedula, int numeroAsignatura, Fecha fecha, int calificacion) {
+void registrarCursoAlumno(HashAlumnos &alumnos, Asignaturas asignaturas, Grafo &grafo, int cedula, int numeroAsignatura, Fecha fecha, int calificacion) {
 
-    if (hayAlumno(alumnos, cedula)){
+    bool ok = true;
+    if (!hayAlumno(alumnos, cedula)) {
+        printf("Error: el alumno no esta registrado.\n");
+        ok = false;
+    }
+
+    if (ok) {
+
         Alumno alumno = obtenerAlumno(alumnos, cedula);
-    } else {
-        cout << "Error: el alumno no esta registrado." << endl;
-        return false;
-    }
 
-    if (!existeAsignatura(asignaturas, numeroAsignatura)) {
-        cout << "Error: la asignatura no esta registrada." << endl;
-        return false;
-    }
-    if (!esValidaFecha(fecha)) {
-        cout << "Error: la fecha no es valida." << endl;
-        return false;
-    }
-    if (calificacion < 0 || calificacion > 12) {
-        cout << "Error: la calificacion debe estar entre 0 y 12." << endl;
-        return false;
-    }
-    if (aproboAsignatura(escolaridadAlumno(alumno), numeroAsignatura)) {
-        cout << "Error: el alumno ya aprobo esa asignatura anteriormente." << endl;
-        return false;
-    }
-    if (!tienePreviasInmediatasAprobadas(alumno, grafo, numeroAsignatura)) {
-        cout << "Error: el alumno no tiene aprobadas todas las previas inmediatas." << endl;
-        return false;
-    }
-    if (!fechaPosteriorOIgualAlUltimoCurso(escolaridadAlumno(alumno), fecha)) {
-        cout << "Error: la fecha debe ser igual o posterior a la fecha del ultimo curso registrado." << endl;
-        return false;
-    }
+        if (aproboAsignatura(escolaridadAlumno(alumno), numeroAsignatura)) {
+            printf("Error: el alumno ya aprobo esa asignatura anteriormente.");
+            ok = false;
+        }
+        else if (!tienePreviasInmediatasAprobadas(alumno, grafo, numeroAsignatura)) {
+            printf("Error: el alumno no tiene aprobadas todas las previas inmediatas.");
+            ok = false;
+        }
+        else if (!fechaPosteriorOIgualAlUltimoCurso(escolaridadAlumno(alumno), fecha)) {
+            printf("Error: la fecha debe ser igual o posterior a la fecha del ultimo curso registrado.");
+            ok = false;
+        }
+        else if (!existeAsignatura(asignaturas, numeroAsignatura)) {
+            printf("Error: la asignatura no esta registrada.");
+            ok = false;
+        }
+        else if (!esValidaFecha(fecha)) {
+            printf("Error: la fecha no es valida.");
+            ok = false;
+        }
+        else if (calificacion < 0 || calificacion > 12) {
+            printf("Error: la calificacion debe estar entre 0 y 12.");
+            ok = false;
+        }
 
-    Asignatura asignatura = obtenerAsignatura(asignaturas, numeroAsignatura);
-    Curso curso;
-    crearCurso(curso, numeroAsignatura, obtenerNombre(asignatura), fecha, calificacion);
-    registrarCurso(escolaridadAlumno(alumno), curso);
-    return true;
+        if (ok) {
+            Asignatura asignatura = obtenerAsignatura(asignaturas, numeroAsignatura);
+            Curso curso;
+            crearCurso(curso, numeroAsignatura, obtenerNombre(asignatura), fecha, calificacion);
+            registrarCurso(escolaridadAlumno(alumno), curso);
+            printf("Curso agregado a la escolaridad correctamente.\n");
+        }
+    }
 }
 
-void mostrarResumenAlumno(Alumnos alumnos) {
+void mostrarResumenAlumno(HashAlumnos alumnos) {
     int cedula;
 
-    cout << "Ingrese cedula: ";
-    cin(cedula);
+    printf("Ingrese cedula: ");
+    scanf("%d", &cedula);
 
     if (hayAlumno(alumnos, cedula)){
         Alumno alumno = obtenerAlumno(alumnos, cedula);
          imprimirResumenAlumno(alumno);
     } else {
-        cout << "Error: el alumno no esta registrado." << endl;
-        return false;
+        printf("Error: el alumno no esta registrado.");
     }
 }
 
-void mostrarEscolaridadAlumno(Alumnos alumnos) {
+void mostrarEscolaridadAlumno(HashAlumnos alumnos) {
      int cedula;
 
-    cout << "Ingrese cedula: ";
-    cin(cedula);
+    printf("Ingrese cedula: ");
+    scanf("%d", &cedula);
 
     if (hayAlumno(alumnos, cedula)){
         Alumno alumno = obtenerAlumno(alumnos, cedula);
          listarEscolaridad(escolaridadAlumno(alumno));
 
     } else {
-        cout << "Error: el alumno no esta registrado." << endl;
-        return false;
+        printf("Error: el alumno no esta registrado.");
     }
 
 }
 
-void registrarPreviatura(GrafoPreviaturas &g, Asignaturas &A, int numAsignatura, int numPrevia) {
+void registrarPreviatura(Grafo &g, Asignaturas &A, int numAsignatura, int numPrevia) {
 
-    if (numAsignatura < 0 || numAsignatura >= A.tope || numPrevia < 0 || numPrevia >= A.tope) {
-        cout << "\n Al menos una de las asignaturas ingresadas no existe en el sistema." << endl;
-        return;
+    if (!existeAsignatura(A, numAsignatura) || !existeAsignatura(A,numPrevia)) {
+        printf("\n Al menos una de las asignaturas ingresadas no existe en el sistema.");
     }
 
     if (ExistePreviatura(g, numPrevia, numAsignatura, A.tope)) {
-        cout << "\n No se puede registrar la asignatura por generar un ciclo" << endl;
-        return;
+        printf("\n No se puede registrar la asignatura por generar un ciclo");
     }
 
     AgregarPreviatura(g, numAsignatura, numPrevia);
-    cout << "\n Previatura registrada correctamente." << endl;
+    printf("\n Previatura registrada correctamente.");
 
 }
 
 void listarPreviaturas(Asignaturas &A, Grafo G, int numAsignatura) {
 
-    int tope = cantAsignaturasRegistradas(A);
+    if (existeAsignatura(A, numAsignatura)) {
+        bool visitado[cantAsignaturas] = { false };
+        int tope = cantAsignaturasRegistradas(A);
 
-    if (numAsignatura < 0 || numAsignatura >= tope) {
-        cout << "La asignatura " << numAsignatura << " no esta registrada." << endl;
-        return;
-    }
+        buscarPreviaturas(G, numAsignatura, tope, visitado);
 
-    bool visitado[cantAsignaturas] = { false };
+        printf("ASIGNATURAS PREVIAS: \n");
+        for (int j = 0; j < tope; j++) {
+            int numMateriaActual = obtenerNumeroAsignatura(A, j);
 
-    buscarPreviaturas(G, numAsignatura, tope, visitado);
-
-    cout << "ASIGNATURAS PREVIAS: \n" << endl;
-    for (int i = 0; i < tope; i++) {
-        if (visitado[i]) {
-            cout << "Numero: " << i
-                 << "Nombre: " << obtenerNombreAsignatura(A, i)
-                 << "--------------------------------" << endl;
+            if (visitado[numMateriaActual]) {
+                printf("Numero: %d",numMateriaActual);
+                printf("\n Nombre: ");
+                strPrint(obtenerNombreAsignatura(A, numMateriaActual));
+                printf("\n --------------------------------");
+            }
         }
+    } else {
+        printf("La asignatura %d no esta registrada", numAsignatura);
     }
+
 }
 
-void ejecutarMenu(Grafo &g) {
-    int opcion;
-
+void ejecutarMenu(Grafo &G, Asignaturas &AS, HashAlumnos &AL) {
+    int opcion, cedula, horas, opaux, numAsignatura, numPrevia, telefono, calificacion;
+    String nombre, apellido;
+    bool optativa;
     do {
         mostrarOpciones();
-        cin >> opcion;
-        cout << "\n";
-
+        scanf("%d", &opcion);
+        fflush(stdin);
         switch (opcion) {
+
             case 1: {
-                cout << "=== Registrar Asignatura ===\n";
-                String nombre;
-                int horas;
-                bool optativa;
-
+                printf("=== Registrar Asignatura ===\n");
                 strCrear(nombre);
-                cout << "Ingrese nombre: ";
+                printf("Ingrese nombre: ");
                 strScan(nombre);
-
-                cout << "Ingrese horas: ";
-                cin >> horas;
-                cout << "Es optativa? (1: Si, 0: No): ";
-                cin >> optativa;
-
-                crearAsignaturas(A, numero, nombre, horas, optativa);
+                printf("Ingrese horas: ");
+                scanf("%d", &horas);
+                printf("Es optativa? (1: Si, 0: No): ");
+                scanf("%d", &opaux);
+                optativa = (opaux == 1 ? true : false);
+                crearAsignaturas(AS, nombre, horas, optativa);
                 strDestruir(nombre);
                 break;
             }
             case 2:
-                cout << "=== Agregar Previatura ===\n";
-                int numAsignatura, numPrevia;
-                cout << "Ingrese el numero de la Asignatura: ";
-                cin >> numAsignatura;
-                cout << "Ingrese el numero de la Asignatura que sera su previa: ";
-                cin >> numPrevia;
-                registrarPreviatura(G, A, numAsignatura, numPrevia)
+                printf("=== Agregar Previatura ===\n");
+                printf("Ingrese el numero de la Asignatura: ");
+                scanf("%d", &numAsignatura);
+                printf("Ingrese el numero de la Asignatura que sera su previa: ");
+                scanf("%d", &numPrevia);
+                registrarPreviatura(G, AS, numAsignatura, numPrevia);
                 break;
             case 3:
-                cout << "=== Registrar Alumno ===\n";
-                int cedula;
-                String nombre;
-                String apellido;
-                int telefono;
-
+                printf("=== Registrar Alumno ===\n");
                 strCrear(nombre);
                 strCrear(apellido);
 
-                cout << "Ingrese cedula: ";
-                cin >> cedula;
+                printf("Ingrese cedula: ");
+                scanf("%d", &cedula);
 
-                cout << "Ingrese nombre: ";
+                printf("Ingrese nombre: ");
                 strScan(nombre);
 
-                cout << "Ingrese apellido: ";
+                printf("Ingrese apellido: ");
                 strScan(apellido);
 
-                cout << "Ingrese telefono: ";
-                cin >> telefono;
+                printf("Ingrese telefono: ");
+                scanf("%d", &telefono);
 
-                inscribirAlumno(alumnos, cedula, nombre, apellido, telefono);
+                inscribirAlumno(AL, cedula, nombre, apellido, telefono);
+
                 strDestruir(nombre);
                 strDestruir(apellido);
                 break;
             case 4:
-                cout << "=== Registrar Curso Aprobado ===\n";
-                registrarCursoAlumno(alumnos, A, G, cedula, numeroAsignatura, fecha, calificacion))
+                printf("=== Registrar Curso Aprobado ===\n");
+                printf("Ingrese cedula del alumno: ");
+                scanf("%d", &cedula);
+                printf("Ingrese numero de asignatura aprobada: ");
+                scanf("%d", &numAsignatura);
+                printf("Ingrese fecha (en el formato DD MM YYYY): ");
+                Fecha fecha;
+                cargarFecha(fecha);
+                printf("Ingrese calificacion obtenida: ");
+                scanf("%d", &calificacion);
+                registrarCursoAlumno(AL, AS, G, cedula, numAsignatura, fecha, calificacion);
                 break;
             case 5:
-                cout << "=== Listar Asignaturas ===\n";
-                listarAsignaturas(A);
+                printf("=== Listar Asignaturas ===\n");
+                listarAsignaturas(AS);
                 break;
             case 6:
-                cout << "=== Listar Previas de una asignatura ===\n";
-                listarPreviaturas(A, G, numAsignatura);
+                printf("=== Listar Previas de una asignatura ===\n");
+                printf("Ingrese asignatura para listar sus previas: ");
+                scanf("%d", &numAsignatura);
+                listarPreviaturas(AS, G, numAsignatura);
                 break;
             case 7:
-                cout << "=== Listar datos de un alumno ===\n";
-                mostrarResumenAlumno(alumnos);
+                printf("=== Listar datos de un alumno ===\n");
+                mostrarResumenAlumno(AL);
                 break;
             case 8:
-                cout << "=== Listar escolaridad ===\n";
-                mostrarEscolaridadAlumno(alumnos);
+                printf("=== Listar escolaridad ===\n");
+                mostrarEscolaridadAlumno(AL);
                 break;
             case 0:
-                cout << "Salir \n";
+                printf("Chau chau! \n");
                 break;
             default:
-                cout << "Opcion invalida.\n";
+                printf("Opcion invalida.\n");
                 break;
         }
-        cout << "\n";
+        printf("\n");
     } while (opcion != 0);
 }

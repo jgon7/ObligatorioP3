@@ -7,14 +7,13 @@ void crear (HashAlumnos &alumnos) {
     }
 }
 
-bool inscribirAlumno(HashAlumnos &alumnos, int cedula, String nombre, String apellido, int telefono) {
+void inscribirAlumno(HashAlumnos &alumnos, int cedula, String nombre, String apellido, int telefono) {
     if (hayAlumno(alumnos, cedula)) {
         printf("Error: ya existe un alumno con esa cedula.\n");
-        return false;
     }
     Alumno alumno = crearAlumno(cedula, nombre, apellido, telefono);
     InsertarEnHash(alumnos, alumno);
-    return true;
+    printf("Alumno agregado correctamente.\n");
     /*
     Lista nuevo = new Nodo;
     nuevo->alumno = alumno;

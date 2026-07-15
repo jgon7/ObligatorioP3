@@ -50,6 +50,7 @@
 		<Unit filename="GrafoPreviaturas.cpp" />
 		<Unit filename="GrafoPreviaturas.h" />
 		<Unit filename="Menu.cpp" />
+		<Unit filename="Menu.h" />
 		<Unit filename="String.cpp" />
 		<Unit filename="String.h" />
 		<Unit filename="main.cpp" />
