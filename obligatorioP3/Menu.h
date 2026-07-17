@@ -3,6 +3,6 @@
 #include <iostream>
 using namespace std;
 
-void ejecutarMenu(Grafo &G, Asignaturas &AS, HashAlumnos &AL);
+void ejecutarMenu(Grafo &G, Asignaturas &AS, Alumnos &AL);
 
 #endif // MENU_H_INCLUDED

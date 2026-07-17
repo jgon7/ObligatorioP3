@@ -10,11 +10,11 @@ int main()
 {
     Grafo G;
     Asignaturas A;
-    HashAlumnos alumnos;
+    Alumnos alumnos;
 
     CrearGrafo(G);
     inicializarArregloAsignaturas(A);
-    crear(alumnos);
+    Crear(alumnos);
 
     ejecutarMenu(G, A, alumnos);
 
