@@ -1,8 +1,4 @@
-#include "Alumnos.h"
-#include "Asignaturas.h"
-#include "GrafoPreviaturas.h"
-#include "Fecha.h"
-#include <iostream>
+#include "Menu.h"
 
 using namespace std;
 

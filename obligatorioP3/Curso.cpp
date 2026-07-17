@@ -10,6 +10,17 @@ void crearCurso(Curso &C, int numeroA, String nombreA, Fecha fecha, int califica
     C.Calificacion = calificacion;
 }
 
-String obtenerNombre(Curso curso){
+String obtenerNombreAsignatura(Curso curso){
     return curso.nombreAsignatura;
+}
+
+int obtenerNumeroAsignatura(Curso curso){
+    return curso.numeroAsignatura;
+}
+
+Fecha obtenerFecha(Curso curso){
+    return curso.fecha;
+}
+int obtenerCalificacion(Curso curso){
+    return curso.Calificacion;
 }

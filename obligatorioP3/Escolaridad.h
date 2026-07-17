@@ -13,8 +13,6 @@ typedef struct{
                 NodoCurso * ult;
                 } Escolaridad;
 
-//typedef struct rep_escolaridad *Escolaridad;
-
 void Crear(Escolaridad &e);
 void InsBack(Escolaridad &e, Curso curso);
 bool aproboAsignatura(Escolaridad escolaridad, int numeroAsignatura);

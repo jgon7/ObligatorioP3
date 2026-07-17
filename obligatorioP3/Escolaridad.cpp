@@ -26,18 +26,20 @@ void InsBack(Escolaridad &e, Curso curso){
 
 void copiarCurso(Curso &destino, Curso origen){
     crearCurso(destino,
-               origen.numeroAsignatura,
-               origen.nombreAsignatura,
-               origen.fecha,
-               origen.Calificacion);
+               obtenerNumeroAsignatura(origen),
+               obtenerNombreAsignatura(origen),
+               obtenerFecha(origen),
+               obtenerCalificacion(origen)
+                );
 }
 
 bool aproboAsignatura(Escolaridad escolaridad, int numeroAsignatura) {
     NodoCurso * actual = escolaridad.prim;
 
     while (actual != NULL) {
-        if (actual->curso.numeroAsignatura == numeroAsignatura &&
-            actual->curso.Calificacion >= 6) {
+
+        if (obtenerNumeroAsignatura(actual->curso) == numeroAsignatura &&
+            obtenerCalificacion(actual->curso) >= 6) {
             return true;
         }
         actual = actual->sig;
@@ -49,8 +51,8 @@ bool fechaPosteriorOIgualAlUltimoCurso(Escolaridad escolaridad, Fecha fecha) {
     if (Vacia(escolaridad)) {
         return true;
     }
-    return esMayorFechas(fecha, escolaridad.ult->curso.fecha) ||
-           sonIgualesFechas(fecha, escolaridad.ult->curso.fecha);
+    return esMayorFechas(fecha, (obtenerFecha(escolaridad.ult->curso))) ||
+           sonIgualesFechas(fecha, obtenerFecha(escolaridad.ult->curso));
 }
 
 int cantidadCursos(Escolaridad escolaridad) {
@@ -69,7 +71,7 @@ int cantidadCursosAprobados(Escolaridad escolaridad) {
     NodoCurso * actual = escolaridad.prim;
 
     while (actual != NULL) {
-        if (actual->curso.Calificacion >= 6) {
+        if ((obtenerCalificacion(actual->curso)) >= 6) {
             cantidad++;
         }
         actual = actual->sig;
@@ -85,12 +87,12 @@ void listarEscolaridad(Escolaridad escolaridad) {
     }
 
     while (actual != NULL) {
-        printf("Asignatura %d - ", actual->curso.numeroAsignatura);
-        strPrint(actual->curso.nombreAsignatura);
+        printf("Asignatura %d - ", obtenerNumeroAsignatura(actual->curso));
+        strPrint(obtenerNombreAsignatura(actual->curso));
         printf(" | Fecha: ");
-        mostrarFecha(actual->curso.fecha);
-        printf(" | Calificacion: %d | %s\n", actual->curso.Calificacion,
-               actual->curso.Calificacion >= 6 ? "Aprobada" : "No aprobada");
+        mostrarFecha(obtenerFecha(actual->curso));
+        printf(" | Calificacion: %d | %s\n", obtenerCalificacion(actual->curso),
+               obtenerCalificacion(actual->curso) >= 6 ? "Aprobada" : "No aprobada");
         actual = actual->sig;
     }
 }

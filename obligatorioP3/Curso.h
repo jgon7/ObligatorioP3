@@ -12,7 +12,10 @@ typedef struct {
 } Curso;
 
 void crearCurso(Curso &C, int numeroA, String nombreA, Fecha fecha, int calificacion);
-String obtenerNombre(Curso curso);
+int obtenerNumeroAsignatura(Curso curso);
+String obtenerNombreAsignatura(Curso curso);
+Fecha obtenerFecha(Curso curso);
+int obtenerCalificacion(Curso curso);
 
 
 #endif // CURSO_H_INCLUDED

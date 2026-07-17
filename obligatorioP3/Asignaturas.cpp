@@ -26,7 +26,7 @@ String obtenerNombreAsignatura(Asignaturas A, int numAsignatura) {
 bool existeAsignatura(Asignaturas A, int numero) {
     return numero >= 0
         && numero < A.tope
-        && A.asignatura[numero].numeroAsignatura == numero;
+        && obtenerNumeroAsignatura(A, numero) == numero;
 }
 
 Asignatura obtenerAsignatura(Asignaturas A, int numero) {
