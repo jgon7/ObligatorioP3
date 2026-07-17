@@ -112,17 +112,12 @@ void registrarPreviatura(Grafo &g, Asignaturas &A, int numAsignatura, int numPre
 
     if (!existeAsignatura(A, numAsignatura) || !existeAsignatura(A,numPrevia)) {
         printf("\n Al menos una de las asignaturas ingresadas no existe en el sistema.");
-         return;
-    }
-
-    if (ExisteArista(g, numAsignatura, numPrevia, A.tope)) {
+    } else if (ExisteArista(g, numAsignatura, numPrevia, A.tope)) {
         printf("\n No se puede registrar la asignatura por generar un ciclo");
-         return;
+    } else {
+        AgregarArista(g, numPrevia, numAsignatura);
+        printf("\n Previatura registrada correctamente.");
     }
-
-    AgregarArista(g, numPrevia, numAsignatura);
-    printf("\n Previatura registrada correctamente.");
-
 }
 
 void listarPreviaturas(Asignaturas &A, Grafo G, int numAsignatura) {
