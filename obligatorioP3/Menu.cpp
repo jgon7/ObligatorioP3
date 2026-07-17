@@ -203,7 +203,7 @@ void ejecutarMenu(Grafo &G, Asignaturas &AS, Alumnos &AL) {
                 printf("=== Registrar Curso ===\n");
                 printf("Ingrese cedula del alumno: ");
                 scanf("%d", &cedula);
-                printf("Ingrese numero de asignatura aprobada: ");
+                printf("Ingrese numero de asignatura: ");
                 scanf("%d", &numAsignatura);
                 printf("Ingrese fecha (en el formato DD MM YYYY): ");
                 Fecha fecha;
