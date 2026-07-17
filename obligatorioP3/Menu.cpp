@@ -200,7 +200,7 @@ void ejecutarMenu(Grafo &G, Asignaturas &AS, Alumnos &AL) {
                 strDestruir(apellido);
                 break;
             case 4:
-                printf("=== Registrar Curso Aprobado ===\n");
+                printf("=== Registrar Curso ===\n");
                 printf("Ingrese cedula del alumno: ");
                 scanf("%d", &cedula);
                 printf("Ingrese numero de asignatura aprobada: ");
