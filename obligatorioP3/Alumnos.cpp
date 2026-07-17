@@ -1,18 +1,18 @@
 #include "Alumnos.h"
 #include <stdio.h>
 
-void crear (HashAlumnos &alumnos) {
+void Crear(Alumnos &alumnos) {
     for (int i = 0; i < valorHash; i++) {
         alumnos[i] = NULL;
     }
 }
 
-void inscribirAlumno(HashAlumnos &alumnos, int cedula, String nombre, String apellido, int telefono) {
-    if (hayAlumno(alumnos, cedula)) {
+void inscribirAlumno(Alumnos &alumnos, int cedula, String nombre, String apellido, int telefono) {
+    if (Pertenece(alumnos, cedula)) {
         printf("Error: ya existe un alumno con esa cedula.\n");
     } else {
         Alumno alumno = crearAlumno(cedula, nombre, apellido, telefono);
-        InsertarEnHash(alumnos, alumno);
+        Insertar(alumnos, alumno);
         printf("Alumno agregado correctamente.\n");
     }
     /*
@@ -24,7 +24,7 @@ void inscribirAlumno(HashAlumnos &alumnos, int cedula, String nombre, String ape
     */
 }
 
-Alumno &obtenerAlumno(HashAlumnos alumnos, int cedula) {
+Alumno &Obtener(Alumnos alumnos, int cedula) {
     int cubeta = funcionHash(cedula);
     return buscarEnLista(alumnos[cubeta], cedula);
 }
@@ -42,16 +42,16 @@ Alumno &buscarEnLista(Lista lista, int cedula) {
     }
 }
 
-void InsertarEnHash (HashAlumnos &alumnos, Alumno e) {
-    int cubeta = funcionHash(cedulaAlumno(e));
+void Insertar(Alumnos &alumnos, Alumno alumno) {
+    int cubeta = funcionHash(cedulaAlumno(alumno));
 
     Nodo * nuevo = new Nodo;
-    nuevo->alumno = e;
+    nuevo->alumno = alumno;
     nuevo->sig = alumnos[cubeta];
     alumnos[cubeta] = nuevo;
 }
 
-bool hayAlumno(HashAlumnos alumnos, int cedula){
+bool Pertenece(Alumnos alumnos, int cedula){
     int posicion = funcionHash(cedula);
 
     //lista que esta en esa posición

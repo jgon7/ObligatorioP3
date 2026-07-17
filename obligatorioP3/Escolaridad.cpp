@@ -1,12 +1,12 @@
 #include "Escolaridad.h"
 #include <stdio.h>
 
-void crearEscolaridad(Escolaridad &escolaridad){
-    escolaridad.prim = NULL;
-    escolaridad.ult = NULL;
+void Crear(Escolaridad &e){
+    e.prim = NULL;
+    e.ult = NULL;
 }
 
-void registrarCurso(Escolaridad &escolaridad, Curso curso){
+void InsBack(Escolaridad &e, Curso curso){
 
     NodoCurso *nuevo = new NodoCurso;
 
@@ -14,13 +14,13 @@ void registrarCurso(Escolaridad &escolaridad, Curso curso){
 
     nuevo->sig = NULL;
 
-    if(escolaridad.prim == NULL){
-        escolaridad.prim = nuevo;
-        escolaridad.ult = nuevo;
+    if(e.prim == NULL){
+        e.prim = nuevo;
+        e.ult = nuevo;
     }
     else{
-        escolaridad.ult->sig = nuevo;
-        escolaridad.ult = nuevo;
+        e.ult->sig = nuevo;
+        e.ult = nuevo;
     }
 }
 
@@ -46,7 +46,7 @@ bool aproboAsignatura(Escolaridad escolaridad, int numeroAsignatura) {
 }
 
 bool fechaPosteriorOIgualAlUltimoCurso(Escolaridad escolaridad, Fecha fecha) {
-    if (esVacia(escolaridad)) {
+    if (Vacia(escolaridad)) {
         return true;
     }
     return esMayorFechas(fecha, escolaridad.ult->curso.fecha) ||
@@ -80,7 +80,7 @@ int cantidadCursosAprobados(Escolaridad escolaridad) {
 void listarEscolaridad(Escolaridad escolaridad) {
     NodoCurso * actual = escolaridad.prim;
 
-    if (esVacia(escolaridad)) {
+    if (Vacia(escolaridad)) {
         printf("No hay cursos registrados en la escolaridad.\n");
     }
 
@@ -95,6 +95,6 @@ void listarEscolaridad(Escolaridad escolaridad) {
     }
 }
 
-bool esVacia(Escolaridad e) {
+bool Vacia(Escolaridad e) {
     return (e.prim == NULL);
 }

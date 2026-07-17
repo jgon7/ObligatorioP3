@@ -15,15 +15,14 @@ typedef struct{
 
 //typedef struct rep_escolaridad *Escolaridad;
 
-void crearEscolaridad(Escolaridad &escolaridad);
-void registrarCurso(Escolaridad &escolaridad, Curso curso); //insertarAlFinal
+void Crear(Escolaridad &e);
+void InsBack(Escolaridad &e, Curso curso);
 bool aproboAsignatura(Escolaridad escolaridad, int numeroAsignatura);
 bool fechaPosteriorOIgualAlUltimoCurso(Escolaridad escolaridad, Fecha fecha);
 int cantidadCursos(Escolaridad escolaridad);
 int cantidadCursosAprobados(Escolaridad escolaridad);
 void listarEscolaridad(Escolaridad escolaridad);
 void copiarCurso(Curso &destino, Curso origen);
-int cantidadCursos(Escolaridad escolaridad);
-bool esVacia(Escolaridad escolaridad);
+bool Vacia(Escolaridad e);
 
 #endif // ESCOLARIDAD_H_INCLUDED

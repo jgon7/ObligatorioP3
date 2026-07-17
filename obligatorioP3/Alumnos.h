@@ -13,15 +13,15 @@ typedef struct NodoL {
 } Nodo;
 
 typedef Nodo* Lista;
-typedef Lista HashAlumnos[valorHash];
+typedef Lista Alumnos[valorHash];
 
 
-void crear(HashAlumnos &alumnos);
-void inscribirAlumno(HashAlumnos &alumnos, int cedula, String nombre, String apellido, int telefono);
-bool hayAlumno(HashAlumnos alumnos, int cedula);
-Alumno &obtenerAlumno(HashAlumnos alumnos, int cedula);
+void Crear(Alumnos &alumnos);
+void inscribirAlumno(Alumnos &alumnos, int cedula, String nombre, String apellido, int telefono);
+bool Pertenece(Alumnos alumnos, int cedula);
+Alumno &Obtener(Alumnos alumnos, int cedula);
 int funcionHash(int cedula);
 Alumno &buscarEnLista(Lista lista, int cedula);
-void InsertarEnHash (HashAlumnos &alumnos, Alumno e);
+void Insertar(Alumnos &alumnos, Alumno alumno);
 
 #endif // ALUMNOS_H_INCLUDED

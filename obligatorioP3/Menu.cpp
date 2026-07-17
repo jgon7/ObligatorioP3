@@ -35,17 +35,17 @@ bool tienePreviasInmediatasAprobadas(Alumno alumno, Grafo &grafo, int numeroAsig
     return true;
 }
 
-void registrarCursoAlumno(HashAlumnos &alumnos, Asignaturas asignaturas, Grafo &grafo, int cedula, int numeroAsignatura, Fecha fecha, int calificacion) {
+void registrarCursoAlumno(Alumnos &alumnos, Asignaturas asignaturas, Grafo &grafo, int cedula, int numeroAsignatura, Fecha fecha, int calificacion) {
 
     bool ok = true;
-    if (!hayAlumno(alumnos, cedula)) {
+    if (!Pertenece(alumnos, cedula)) {
         printf("Error: el alumno no esta registrado.\n");
         ok = false;
     }
 
     if (ok) {
 
-        Alumno &alumno = obtenerAlumno(alumnos, cedula);
+        Alumno &alumno = Obtener(alumnos, cedula);
 
         if (aproboAsignatura(escolaridadAlumno(alumno), numeroAsignatura)) {
             printf("Error: el alumno ya aprobo esa asignatura anteriormente.");
@@ -76,34 +76,34 @@ void registrarCursoAlumno(HashAlumnos &alumnos, Asignaturas asignaturas, Grafo &
             Asignatura asignatura = obtenerAsignatura(asignaturas, numeroAsignatura);
             Curso curso;
             crearCurso(curso, numeroAsignatura, obtenerNombre(asignatura), fecha, calificacion);
-            registrarCurso(escolaridadAlumno(alumno), curso);
+            InsBack(escolaridadAlumno(alumno), curso);
             printf("Curso agregado a la escolaridad correctamente.\n");
         }
     }
 }
 
-void mostrarResumenAlumno(HashAlumnos alumnos) {
+void mostrarResumenAlumno(Alumnos alumnos) {
     int cedula;
 
     printf("Ingrese cedula: ");
     scanf("%d", &cedula);
 
-    if (hayAlumno(alumnos, cedula)){
-        Alumno alumno = obtenerAlumno(alumnos, cedula);
+    if (Pertenece(alumnos, cedula)){
+        Alumno alumno = Obtener(alumnos, cedula);
          imprimirResumenAlumno(alumno);
     } else {
         printf("Error: el alumno no esta registrado.");
     }
 }
 
-void mostrarEscolaridadAlumno(HashAlumnos alumnos) {
+void mostrarEscolaridadAlumno(Alumnos alumnos) {
      int cedula;
 
     printf("Ingrese cedula: ");
     scanf("%d", &cedula);
 
-    if (hayAlumno(alumnos, cedula)){
-        Alumno alumno = obtenerAlumno(alumnos, cedula);
+    if (Pertenece(alumnos, cedula)){
+        Alumno alumno = Obtener(alumnos, cedula);
          listarEscolaridad(escolaridadAlumno(alumno));
 
     } else {
@@ -154,7 +154,7 @@ void listarPreviaturas(Asignaturas &A, Grafo G, int numAsignatura) {
 
 }
 
-void ejecutarMenu(Grafo &G, Asignaturas &AS, HashAlumnos &AL) {
+void ejecutarMenu(Grafo &G, Asignaturas &AS, Alumnos &AL) {
     int opcion, cedula, horas, opaux, numAsignatura, numPrevia, telefono, calificacion;
     String nombre, apellido;
     bool optativa;

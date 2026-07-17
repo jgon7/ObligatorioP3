@@ -10,7 +10,7 @@ Alumno crearAlumno(int cedula, String nombre, String apellido, int telefono) {
     strCop(a.nombre, nombre);
     strCop(a.apellido, apellido);
     a.telefono = telefono;
-    crearEscolaridad(a.escolaridad);
+    Crear(a.escolaridad);
     return a;
 }
 
