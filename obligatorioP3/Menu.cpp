@@ -10,7 +10,7 @@ void mostrarOpciones() {
      printf("1 - Registrar asignatura\n");
      printf("2 - Agregar previatura\n");
      printf("3 - Registrar alumno\n");
-     printf("4 - Registrar curso aprobado\n");
+     printf("4 - Registrar curso a escolaridad alumno\n");
      printf("5 - Listar Asignaturas\n");
      printf("6 - Listar previas de una asignatura\n");
      printf( "7 - Listar datos de un alumno\n");
