@@ -50,7 +50,7 @@ void listarAsignaturas(Asignaturas a) {
 void ordenarAsignaturas(Asignaturas &a) {
     for (int i = 0; i < a.tope - 1; i++) {
         for (int j = 0; j < a.tope - i - 1; j++) {
-            if (a.asignatura[j].numeroAsignatura > a.asignatura[j + 1].numeroAsignatura) {
+            if (obtenerNumeroAsignatura(a,j) > obtenerNumeroAsignatura(a,j)) {
                 Asignatura aux = a.asignatura[j];
                 a.asignatura[j] = a.asignatura[j + 1];
                 a.asignatura[j + 1] = aux;
